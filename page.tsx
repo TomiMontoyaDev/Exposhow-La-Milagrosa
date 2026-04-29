@@ -11,13 +11,7 @@ function GoldParticles() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const particles: {
-      x: number;
-      y: number;
-      size: number;
-      speed: number;
-      opacity: number;
-    }[] = [];
+    const particles: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
     for (let i = 0; i < 60; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -37,10 +31,7 @@ function GoldParticles() {
         ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity})`;
         ctx.fill();
         p.y -= p.speed;
-        if (p.y < -10) {
-          p.y = canvas.height + 10;
-          p.x = Math.random() * canvas.width;
-        }
+        if (p.y < -10) { p.y = canvas.height + 10; p.x = Math.random() * canvas.width; }
       });
       animId = requestAnimationFrame(animate);
     }
@@ -78,40 +69,22 @@ function GoldDivider() {
 /* ─── Hero Section ──────────────────────────────────────── */
 function Hero() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section
-      ref={ref}
-      className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden"
-    >
+    <section ref={ref} className="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
       {/* Background */}
       <motion.div style={{ y }} className="absolute inset-0 z-0">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/ferrari.jpg')" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%)",
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url('/ferrari.jpg')" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.9) 100%)" }} />
       </motion.div>
 
       <GoldParticles />
 
       {/* Content */}
-      <motion.div
-        style={{ opacity }}
-        className="relative z-10 px-6 max-w-5xl mx-auto"
-      >
+      <motion.div style={{ opacity }} className="relative z-10 px-6 max-w-5xl mx-auto">
         {/* La Milagrosa logo */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -119,11 +92,7 @@ function Hero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-6 flex justify-center"
         >
-          <img
-            src="/lamilagrosagold.png"
-            alt="La Milagrosa Burger House"
-            className="h-60 object-contain"
-          />
+          <img src="/la_milagrosa_burger.png" alt="La Milagrosa Burger House" className="h-16 object-contain" />
         </motion.div>
 
         <motion.p
@@ -131,10 +100,7 @@ function Hero() {
           animate={{ opacity: 1, letterSpacing: "0.4em" }}
           transition={{ duration: 1.2, delay: 0.4 }}
           className="text-xs uppercase mb-4"
-          style={{
-            color: "#D4AF37",
-            fontFamily: "'Cormorant Garamond', serif",
-          }}
+          style={{ color: "#D4AF37", fontFamily: "'Cormorant Garamond', serif" }}
         >
           Exclusividad · Pasión · Estilo
         </motion.p>
@@ -149,8 +115,7 @@ function Hero() {
             fontSize: "clamp(3.5rem, 10vw, 8rem)",
             lineHeight: 0.95,
             letterSpacing: "-0.02em",
-            background:
-              "linear-gradient(135deg, #f5e17a 0%, #D4AF37 40%, #8B6914 100%)",
+            background: "linear-gradient(135deg, #f5e17a 0%, #D4AF37 40%, #8B6914 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -164,11 +129,7 @@ function Hero() {
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, delay: 1 }}
           className="my-4"
-          style={{
-            height: "1px",
-            background:
-              "linear-gradient(90deg, transparent, #D4AF37, transparent)",
-          }}
+          style={{ height: "1px", background: "linear-gradient(90deg, transparent, #D4AF37, transparent)" }}
         />
 
         <motion.p
@@ -176,10 +137,7 @@ function Hero() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
           className="text-3xl font-light tracking-widest mb-2"
-          style={{
-            color: "#D4AF37",
-            fontFamily: "'Cormorant Garamond', serif",
-          }}
+          style={{ color: "#D4AF37", fontFamily: "'Cormorant Garamond', serif" }}
         >
           &amp;
         </motion.p>
@@ -207,11 +165,7 @@ function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
-            onClick={() =>
-              document
-                .getElementById("event-info")
-                ?.scrollIntoView({ behavior: "smooth" })
-            }
+            onClick={() => document.getElementById("event-info")?.scrollIntoView({ behavior: "smooth" })}
             className="px-10 py-4 font-bold uppercase tracking-widest transition-all duration-300 hover:scale-105"
             style={{
               background: "linear-gradient(135deg, #D4AF37, #8B6914)",
@@ -249,12 +203,7 @@ function Hero() {
         transition={{ repeat: Infinity, duration: 2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
       >
-        <div
-          className="w-px h-12"
-          style={{
-            background: "linear-gradient(180deg, #D4AF37, transparent)",
-          }}
-        />
+        <div className="w-px h-12" style={{ background: "linear-gradient(180deg, #D4AF37, transparent)" }} />
       </motion.div>
     </section>
   );
@@ -263,18 +212,9 @@ function Hero() {
 /* ─── Event Info ─────────────────────────────────────────── */
 function EventInfo() {
   return (
-    <section
-      id="event-info"
-      className="bg-black text-white py-24 relative overflow-hidden"
-    >
+    <section id="event-info" className="bg-black text-white py-24 relative overflow-hidden">
       {/* subtle gold bg glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 70%)",
-        }}
-      />
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 80% 50% at 50% 50%, rgba(212,175,55,0.05) 0%, transparent 70%)" }} />
 
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
         <motion.p
@@ -283,10 +223,7 @@ function EventInfo() {
           transition={{ duration: 1 }}
           viewport={{ once: true }}
           className="text-xs uppercase mb-4"
-          style={{
-            color: "#D4AF37",
-            fontFamily: "'Cormorant Garamond', serif",
-          }}
+          style={{ color: "#D4AF37", fontFamily: "'Cormorant Garamond', serif" }}
         >
           El Evento
         </motion.p>
@@ -310,24 +247,9 @@ function EventInfo() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
-            {
-              icon: "📍",
-              label: "Lugar",
-              value: "La Milagrosa Burger House",
-              sub: "Pereira",
-            },
-            {
-              icon: "🗓",
-              label: "Fecha",
-              value: "Domingo 14 de Junio",
-              sub: "2026",
-            },
-            {
-              icon: "🚗",
-              label: "Actividades",
-              value: "Autos · Hamburguesas",
-              sub: "Cultura & Estilo",
-            },
+            { icon: "📍", label: "Lugar", value: "La Milagrosa Burger House", sub: "Pereira" },
+            { icon: "🗓", label: "Fecha", value: "Sábado 14 de Junio", sub: "2025" },
+            { icon: "🚗", label: "Actividades", value: "Autos · Hamburguesas", sub: "Cultura & Estilo" },
           ].map((item, i) => (
             <motion.div
               key={i}
@@ -336,27 +258,12 @@ function EventInfo() {
               transition={{ duration: 0.6, delay: i * 0.15 }}
               viewport={{ once: true }}
               className="p-8 relative"
-              style={{
-                border: "1px solid rgba(212,175,55,0.25)",
-                background: "rgba(212,175,55,0.03)",
-              }}
+              style={{ border: "1px solid rgba(212,175,55,0.25)", background: "rgba(212,175,55,0.03)" }}
             >
               <div className="text-4xl mb-4">{item.icon}</div>
-              <p
-                className="text-xs uppercase tracking-widest mb-2"
-                style={{ color: "#D4AF37" }}
-              >
-                {item.label}
-              </p>
-              <p
-                className="text-xl font-semibold text-white mb-1"
-                style={{ fontFamily: "'Cormorant Garamond', serif" }}
-              >
-                {item.value}
-              </p>
-              <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>
-                {item.sub}
-              </p>
+              <p className="text-xs uppercase tracking-widest mb-2" style={{ color: "#D4AF37" }}>{item.label}</p>
+              <p className="text-xl font-semibold text-white mb-1" style={{ fontFamily: "'Cormorant Garamond', serif" }}>{item.value}</p>
+              <p className="text-sm" style={{ color: "rgba(255,255,255,0.5)" }}>{item.sub}</p>
             </motion.div>
           ))}
         </div>
@@ -379,64 +286,31 @@ function Invitation() {
           style={{ border: "1px solid rgba(212,175,55,0.4)" }}
         >
           {/* corner accents */}
-          {[
-            "top-0 left-0",
-            "top-0 right-0",
-            "bottom-0 left-0",
-            "bottom-0 right-0",
-          ].map((pos, i) => (
-            <div
-              key={i}
-              className={`absolute ${pos} w-4 h-4`}
-              style={{
-                borderColor: "#D4AF37",
-                borderStyle: "solid",
-                borderWidth: i < 2 ? "2px 0 0 2px" : "0 2px 2px 0",
-              }}
-            />
+          {["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"].map((pos, i) => (
+            <div key={i} className={`absolute ${pos} w-4 h-4`} style={{ borderColor: "#D4AF37", borderStyle: "solid", borderWidth: i < 2 ? "2px 0 0 2px" : "0 2px 2px 0" }} />
           ))}
 
-          <p
-            className="text-xs uppercase tracking-widest mb-8"
-            style={{ color: "#D4AF37", letterSpacing: "0.4em" }}
-          >
+          <p className="text-xs uppercase tracking-widest mb-8" style={{ color: "#D4AF37", letterSpacing: "0.4em" }}>
             Te Invitamos a Disfrutar
           </p>
 
-          <p
-            className="text-lg leading-relaxed text-gray-300 mb-6"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.2rem",
-            }}
-          >
+          <p className="text-lg leading-relaxed text-gray-300 mb-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem" }}>
             Tu pasión por los{" "}
-            <span style={{ color: "#D4AF37", fontWeight: 700 }}>AUTOS</span> y
-            el apoyo a la{" "}
+            <span style={{ color: "#D4AF37", fontWeight: 700 }}>AUTOS</span>{" "}
+            y el apoyo a la{" "}
             <span style={{ color: "#D4AF37", fontWeight: 700 }}>CULTURA</span>{" "}
             de nuestra ciudad son una inspiración para todos.
           </p>
 
           <GoldDivider />
 
-          <p
-            className="text-lg leading-relaxed text-gray-300 mb-6"
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: "1.2rem",
-            }}
-          >
+          <p className="text-lg leading-relaxed text-gray-300 mb-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: "1.2rem" }}>
             Nos vemos en{" "}
-            <span style={{ color: "#D4AF37", fontWeight: 700 }}>
-              LA MILAGROSA
-            </span>{" "}
+            <span style={{ color: "#D4AF37", fontWeight: 700 }}>LA MILAGROSA</span>{" "}
             para compartir una noche increíble llena de{" "}
-            <span style={{ color: "#D4AF37", fontWeight: 700 }}>MOTORES</span> y
-            las mejores{" "}
-            <span style={{ color: "#D4AF37", fontWeight: 700 }}>
-              HAMBURGUESAS
-            </span>
-            .
+            <span style={{ color: "#D4AF37", fontWeight: 700 }}>MOTORES</span>{" "}
+            y las mejores{" "}
+            <span style={{ color: "#D4AF37", fontWeight: 700 }}>HAMBURGUESAS</span>.
           </p>
 
           <motion.p
@@ -445,11 +319,7 @@ function Invitation() {
             transition={{ duration: 1, delay: 0.4 }}
             viewport={{ once: true }}
             className="text-2xl font-bold uppercase tracking-widest"
-            style={{
-              color: "#D4AF37",
-              fontFamily: "'Cormorant Garamond', serif",
-              letterSpacing: "0.3em",
-            }}
+            style={{ color: "#D4AF37", fontFamily: "'Cormorant Garamond', serif", letterSpacing: "0.3em" }}
           >
             ¡Te Esperamos!
           </motion.p>
@@ -521,13 +391,7 @@ function Organizers() {
                 className="h-20 object-contain"
                 style={{ filter: "brightness(0.9) sepia(0.3) saturate(1.5)" }}
               />
-              <span
-                className="text-xs tracking-widest"
-                style={{
-                  color: "rgba(212,175,55,0.6)",
-                  letterSpacing: "0.2em",
-                }}
-              >
+              <span className="text-xs tracking-widest" style={{ color: "rgba(212,175,55,0.6)", letterSpacing: "0.2em" }}>
                 {org.name}
               </span>
             </motion.a>
@@ -536,10 +400,7 @@ function Organizers() {
 
         <GoldDivider />
 
-        <p
-          className="text-xs uppercase tracking-widest mb-10 mt-10"
-          style={{ color: "rgba(255,255,255,0.3)", letterSpacing: "0.4em" }}
-        >
+        <p className="text-xs uppercase tracking-widest mb-10 mt-10" style={{ color: "rgba(255,255,255,0.3)", letterSpacing: "0.4em" }}>
           Patrocinadores
         </p>
 
@@ -571,17 +432,8 @@ function Organizers() {
 /* ─── CTA ────────────────────────────────────────────────── */
 function CTA() {
   return (
-    <section
-      className="relative py-32 text-white text-center overflow-hidden"
-      style={{ background: "#0a0a0a" }}
-    >
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 70%)",
-        }}
-      />
+    <section className="relative py-32 text-white text-center overflow-hidden" style={{ background: "#0a0a0a" }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ background: "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(212,175,55,0.08) 0%, transparent 70%)" }} />
 
       <div className="relative z-10 max-w-3xl mx-auto px-6">
         <motion.h2
@@ -591,8 +443,7 @@ function CTA() {
           className="text-5xl md:text-7xl font-black mb-6 uppercase"
           style={{
             fontFamily: "'Cormorant Garamond', serif",
-            background:
-              "linear-gradient(135deg, #f5e17a 0%, #D4AF37 50%, #8B6914 100%)",
+            background: "linear-gradient(135deg, #f5e17a 0%, #D4AF37 50%, #8B6914 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -631,14 +482,7 @@ function CTA() {
           Ver Ubicación
         </motion.a>
 
-        <div
-          className="mt-16"
-          style={{
-            color: "rgba(255,255,255,0.3)",
-            fontSize: "0.75rem",
-            letterSpacing: "0.3em",
-          }}
-        >
+        <div className="mt-16" style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.75rem", letterSpacing: "0.3em" }}>
           <p>📍 LA MILAGROSA BURGER HOUSE · PEREIRA</p>
         </div>
       </div>
